@@ -1,0 +1,45 @@
+{
+  "name": "@lacelang/validator",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Reference TypeScript validator for the Lace probe scripting language (parser + semantic checks, no runtime)",
+  "license": "Apache-2.0",
+  "author": "lacelang contributors",
+  "keywords": ["lace", "lacelang", "validator", "parser", "http", "probe", "monitoring"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tracedown/lacelang-js-validator.git"
+  },
+  "homepage": "https://github.com/tracedown/lacelang-js-validator",
+  "bugs": "https://github.com/tracedown/lacelang-js-validator/issues",
+  "engines": {
+    "node": ">=18"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.d.ts",
+    "LICENSE",
+    "README.md"
+  ],
+  "bin": {
+    "lacelang-validate": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.4.0",
+    "vitest": "^3.1.0"
+  }
+}
