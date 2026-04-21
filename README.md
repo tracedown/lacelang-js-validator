@@ -12,8 +12,17 @@ package separation rule.
 
 ## Install
 
+Not published to npm yet. Install from GitHub:
+
 ```bash
-npm install @lacelang/validator
+npm install git+https://github.com/tracedown/lacelang-js-validator.git
+```
+
+Or from a local clone:
+
+```bash
+git clone https://github.com/tracedown/lacelang-js-validator.git
+npm install ./lacelang-js-validator
 ```
 
 ## CLI
