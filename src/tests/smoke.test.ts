@@ -18,7 +18,7 @@ function stripAstMetadata(node: any): any {
 describe("Smoke", () => {
   it("minimal get parses", () => {
     const ast = stripAstMetadata(parse('get("$u").expect(status: 200)\n'));
-    expect(ast.version).toBe("0.9.0");
+    expect(ast.version).toBe("0.9.1");
     const [call] = ast.calls;
     expect(call.method).toBe("get");
     expect(call.url).toBe("$u");

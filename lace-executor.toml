@@ -1,0 +1,13 @@
+[executor]
+name        = "lacelang-js-validator"
+version     = "0.1.0"
+language    = "typescript"
+conforms_to = ">=0.9.1"
+
+[adapter]
+parse    = "node dist/cli.js parse {script}"
+validate = "node dist/cli.js validate {script} --vars-list {vars_list} --context {context}"
+timeout_seconds = 30
+
+[conformance]
+types = ["parse", "validate"]

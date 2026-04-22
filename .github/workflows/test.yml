@@ -23,10 +23,29 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: npm install
+        run: rm -f package-lock.json && npm install
 
       - name: Build
         run: npm run build
 
       - name: Run tests
         run: npm test
+
+  conformance:
+    if: github.repository == 'tracedown/lacelang-js-validator' && !startsWith(github.event.pull_request.title, 'WIP:')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install and build
+        run: rm -f package-lock.json && npm install && npm run build
+      - name: Clone lacelang spec repo
+        run: git clone --depth 1 https://github.com/tracedown/lacelang.git ../lacelang
+      - name: Install OpenSSL dev
+        run: sudo apt-get update && sudo apt-get install -y libssl-dev
+      - name: Build conformance harness
+        run: cd ../lacelang/testkit/src && make
+      - name: Run conformance suite
+        run: ../lacelang/testkit/src/build/lace-conformance -m lace-executor.toml --vectors ../lacelang/testkit/vectors --certs-dir ../lacelang/testkit/certs
