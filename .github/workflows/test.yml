@@ -3,8 +3,6 @@ name: Tests
 on:
   pull_request:
     branches: [main]
-  push:
-    branches: [main]
 
 jobs:
   test:
@@ -13,25 +11,20 @@ jobs:
     strategy:
       matrix:
         node-version: ["18", "20", "22"]
-
     steps:
       - uses: actions/checkout@v4
-
-      - name: Set up Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-
       - name: Install dependencies
         run: rm -f package-lock.json && npm install
-
       - name: Build
         run: npm run build
-
       - name: Run tests
         run: npm test
 
   conformance:
+    needs: test
     if: github.repository == 'tracedown/lacelang-js-validator' && !startsWith(github.event.pull_request.title, 'WIP:')
     runs-on: ubuntu-latest
     steps:
@@ -51,3 +44,16 @@ jobs:
         run: mkdir -p /tmp/lace-certs && sh ../lacelang/testkit/certs/generate-certs.sh /tmp/lace-certs
       - name: Run conformance suite
         run: ../lacelang/testkit/src/build/lace-conformance -m lace-executor.toml --vectors ../lacelang/testkit/vectors --certs-dir /tmp/lace-certs
+
+  build-check:
+    needs: conformance
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install and build
+        run: rm -f package-lock.json && npm install && npm run build
+      - name: Pack dry run
+        run: npm pack --dry-run
