@@ -37,7 +37,6 @@ jobs:
         if: steps.check.outputs.exists == 'false'
         with:
           node-version: "22"
-          registry-url: "https://registry.npmjs.org"
 
       - name: Install and build
         if: steps.check.outputs.exists == 'false'
