@@ -22,7 +22,7 @@ function _parse(src: string): any {
 describe("CallParsing", () => {
   it("get", () => {
     const ast = _parse('get("https://example.com")\n    .expect(status: 200)\n');
-    expect(ast.version).toBe("0.9.1");
+    expect(ast.version).toBe("0.9.2");
     expect(ast.calls.length).toBe(1);
     expect(ast.calls[0].method).toBe("get");
     expect(ast.calls[0].url).toBe("https://example.com");

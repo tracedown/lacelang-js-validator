@@ -12,10 +12,12 @@
  */
 
 import { readFileSync } from "node:fs";
+import { createRequire } from "node:module";
 import { parse, ParseError } from "./parser.js";
 import { validate } from "./validator.js";
 
-const VERSION = "0.1.0";
+const require = createRequire(import.meta.url);
+const { version: VERSION } = require("../package.json");
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type AnyObj = Record<string, any>;

@@ -32,7 +32,7 @@ function stringToExpr(s: string): AstNode {
   return { kind: "literal", valueType: "string", value: s };
 }
 
-export const AST_VERSION = "0.9.1";
+export const AST_VERSION = "0.9.2";
 
 const SCOPE_NAMES: ReadonlySet<string> = new Set([
   "status", "body", "headers", "bodySize", "totalDelayMs",

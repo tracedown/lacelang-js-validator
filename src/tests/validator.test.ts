@@ -25,7 +25,7 @@ function warningCodes(source: string, opts: Record<string, any> = {}): string[] 
 
 describe("StructuralRules", () => {
   it("AT_LEAST_ONE_CALL", () => {
-    const sink = validate({ version: "0.9.1", calls: [] });
+    const sink = validate({ version: "0.9.2", calls: [] });
     expect(sink.errors.map(e => e.code)).toContain("AT_LEAST_ONE_CALL");
   });
 
@@ -34,7 +34,7 @@ describe("StructuralRules", () => {
   });
 
   it("EMPTY_CHAIN", () => {
-    const sink = validate({ version: "0.9.1", calls: [{ method: "get", url: "$u", chain: {} }] });
+    const sink = validate({ version: "0.9.2", calls: [{ method: "get", url: "$u", chain: {} }] });
     expect(sink.errors.map(e => e.code)).toContain("EMPTY_CHAIN");
   });
 
