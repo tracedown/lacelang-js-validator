@@ -5,7 +5,15 @@
   "description": "Reference TypeScript validator for the Lace probe scripting language (parser + semantic checks, no runtime)",
   "license": "Apache-2.0",
   "author": "lacelang contributors",
-  "keywords": ["lace", "lacelang", "validator", "parser", "http", "probe", "monitoring"],
+  "keywords": [
+    "lace",
+    "lacelang",
+    "validator",
+    "parser",
+    "http",
+    "probe",
+    "monitoring"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tracedown/lacelang-js-validator.git"
@@ -30,7 +38,7 @@
     "README.md"
   ],
   "bin": {
-    "lacelang-validate": "./dist/cli.js"
+    "lacelang-validate": "dist/cli.js"
   },
   "scripts": {
     "build": "tsc",
