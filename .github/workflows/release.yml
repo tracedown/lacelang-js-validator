@@ -37,7 +37,6 @@ jobs:
         if: steps.check.outputs.exists == 'false'
         with:
           node-version: "22"
-          registry-url: "https://registry.npmjs.org"
 
       - name: Install and build
         if: steps.check.outputs.exists == 'false'
@@ -45,7 +44,9 @@ jobs:
 
       - name: Publish to npm
         if: steps.check.outputs.exists == 'false'
-        run: npm publish --provenance --access public
+        run: |
+          npm config set registry https://registry.npmjs.org/
+          npm publish --provenance --access public
 
       - name: Create tag
         if: steps.check.outputs.exists == 'false'
