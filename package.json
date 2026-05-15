@@ -1,6 +1,6 @@
 {
   "name": "@lacelang/validator",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "description": "Reference TypeScript validator for the Lace probe scripting language (parser + semantic checks, no runtime)",
   "license": "Apache-2.0",
