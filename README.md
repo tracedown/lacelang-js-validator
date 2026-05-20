@@ -1,7 +1,7 @@
 # lacelang-validator (TypeScript)
 
 Reference TypeScript validator for [Lace](https://github.com/tracedown/lacelang) --
-parser and semantic checks with **100% spec conformance** (v0.9.1). Zero
+parser and semantic checks with **100% spec conformance** (v0.9.2<!-- sv -->). Zero
 runtime dependencies.
 
 Parsing and semantic validation only -- no HTTP runtime, no network
