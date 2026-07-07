@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { parse, ParseError } from "../parser.js";
+import { AST_VERSION } from "../parser";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function stripAstMetadata(node: any): any {
@@ -22,7 +23,7 @@ function _parse(src: string): any {
 describe("CallParsing", () => {
   it("get", () => {
     const ast = _parse('get("https://example.com")\n    .expect(status: 200)\n');
-    expect(ast.version).toBe("0.9.2");
+    expect(ast.version).toBe(AST_VERSION);
     expect(ast.calls.length).toBe(1);
     expect(ast.calls[0].method).toBe("get");
     expect(ast.calls[0].url).toBe("https://example.com");

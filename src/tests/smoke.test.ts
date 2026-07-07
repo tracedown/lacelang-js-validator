@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { parse } from "../parser.js";
 import { validate } from "../validator.js";
+import { AST_VERSION } from "../parser";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function stripAstMetadata(node: any): any {
@@ -18,7 +19,7 @@ function stripAstMetadata(node: any): any {
 describe("Smoke", () => {
   it("minimal get parses", () => {
     const ast = stripAstMetadata(parse('get("$u").expect(status: 200)\n'));
-    expect(ast.version).toBe("0.9.2");
+    expect(ast.version).toBe(AST_VERSION);
     const [call] = ast.calls;
     expect(call.method).toBe("get");
     expect(call.url).toBe("$u");
