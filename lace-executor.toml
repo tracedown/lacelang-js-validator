@@ -2,7 +2,7 @@
 name        = "lacelang-js-validator"
 version     = "0.1.1"
 language    = "typescript"
-conforms_to = ">=0.9.2"
+conforms_to = ">=0.9.3"
 
 [adapter]
 parse    = "node dist/cli.js parse {script}"
