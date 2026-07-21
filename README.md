@@ -1,5 +1,7 @@
 # lacelang-validator (TypeScript)
 
+[![npm](https://img.shields.io/npm/v/@lacelang/validator)](https://www.npmjs.com/package/@lacelang/validator)
+
 Reference TypeScript validator for [Lace](https://github.com/tracedown/lacelang) --
 parser and semantic checks with **100% spec conformance** (v0.9.2). Zero
 runtime dependencies.
