@@ -1,6 +1,6 @@
 [executor]
 name        = "lacelang-js-validator"
-version     = "0.1.4"
+version     = "0.1.5"
 language    = "typescript"
 conforms_to = ">=0.9.4"
 

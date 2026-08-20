@@ -19,6 +19,9 @@ const BINARY_PRIORITY: Record<string, number> = {
   "*": 6, "/": 6, "%": 6,
 };
 
+/** Keys that lex as bare identifiers and so need no quoting. */
+const BARE_KEY = /^[a-zA-Z_][a-zA-Z0-9_]*$/;
+
 export function fmt(expr: unknown): string {
   if (expr == null || typeof expr !== "object") {
     return JSON.stringify(expr);
@@ -67,7 +70,7 @@ export function fmt(expr: unknown): string {
   }
   if (k === "objectLit") {
     const entries = (node.entries ?? [])
-      .map((e: AstNode) => `${e.key}: ${fmt(e.value)}`)
+      .map((e: AstNode) => `${fmtKey(e.key)}: ${fmt(e.value)}`)
       .join(", ");
     return `{${entries}}`;
   }
@@ -75,6 +78,16 @@ export function fmt(expr: unknown): string {
     return "[" + (node.items ?? []).map((i: unknown) => fmt(i)).join(", ") + "]";
   }
   return "<unknown>";
+}
+
+/**
+ * Print an object-literal key. Keys that are not bare identifiers (numeric
+ * such as `404`, hyphenated such as `content-type`) must be quoted, otherwise
+ * the printed source does not re-parse.
+ */
+function fmtKey(key: unknown): string {
+  const s = String(key);
+  return BARE_KEY.test(s) ? s : JSON.stringify(s);
 }
 
 function fmtVarPath(path: unknown): string {
