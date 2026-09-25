@@ -8,7 +8,7 @@
  * Grammar reference: `lacelang.g4`.
  */
 
-import { Token, tokenize } from "./lexer.js";
+import { LexError, Token, tokenize } from "./lexer.js";
 
 // A string literal whose content is *exactly* one of:
 //   $$ident        -> run_var
@@ -825,6 +825,12 @@ class Parser {
 }
 
 export function parse(source: string): AstNode {
-  const tokens = tokenize(source);
+  let tokens;
+  try {
+    tokens = tokenize(source);
+  } catch (e) {
+    if (e instanceof LexError) throw new ParseError(e.message, e.line);
+    throw e;
+  }
   return new Parser(tokens).parseScript();
 }
